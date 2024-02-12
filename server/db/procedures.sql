@@ -54,8 +54,8 @@ BEGIN
     SELECT id, titulo, autor, LEFT(contenido, 70) AS acortado, fecha_publicado
     FROM entradas_blog
     WHERE (p_autor IS NULL OR autor LIKE CONCAT('%', p_autor, '%'))
-      OR (p_titulo IS NULL OR titulo LIKE CONCAT('%', p_titulo, '%'))
-      OR (p_keywords IS NULL OR contienePalabraClave(contenido, p_keywords));
+      AND (p_titulo IS NULL OR titulo LIKE CONCAT('%', p_titulo, '%'))
+      AND (p_keywords IS NULL OR contienePalabraClave(contenido, p_keywords));
 END //
 DELIMITER ;
 

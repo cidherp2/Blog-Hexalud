@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react'
 import { useBlogContext } from '../App';
 
+
 const BlogPreviewContainer = styled.div /*style*/ `
 width:100vw;
 
@@ -44,7 +45,8 @@ object-fit:cover;
 
 
 function BlogPreview() {
-    const [blogs,SetBlogs] = useBlogContext();
+    const { blogs, selectedBlogId } = useBlogContext();
+    const [selectedBlog, setSelectedBlog] = useState(null);
     const [blogData, setBlogData] = useState([]);
     const [blogIndex, setBlogIndex] = useState('');
     const [imagenes, SetImagenes] = useState([])
@@ -62,7 +64,7 @@ function BlogPreview() {
 
 
 
-            const index = Math.floor(Math.random() * data.length);
+            const index = Math.floor(Math.random() * data?.length ?? 0);
             setBlogIndex(index);
 
         } catch (err) {
@@ -108,29 +110,62 @@ function BlogPreview() {
     }
 
     useEffect(() => {
+        if (selectedBlogId !== null) {
+          const blogSelected = blogData.find((blog) => blog.id === selectedBlogId);
+          setSelectedBlog(blogSelected);
+        }
+      }, [selectedBlogId, blogs]);
+    
+
+    useEffect(() => {
         fetchBlogData();
         FetchImagenes();
     }, []);
 
-    SetBlogs(blogData);
+    const formatoFecha = (dateString) => {
+      const opciones = { year: 'numeric', month: '2-digit', day: '2-digit' };
+      const fecha = new Date(dateString);
+      return fecha.toLocaleDateString('en-US', opciones);
+    };
 
     return (
         <>
-            {blogData.length > 0 && (
-                <BlogPreviewContainer key={blogData[blogIndex].id}>
-                    <BlogTitle>{blogData[blogIndex].titulo}</BlogTitle>
-                    { imagenes?.photos?.[imagenIndex]?.src?.original && (
-                    <img className='imagenTop'
-                        src={imagenes.photos[imagenIndex].src.original}
-                        about='No se puede cargar la imagen'
-                    />
-                    )}
-                    <BlogContenidoCorto>{blogData[blogIndex].contenido}</BlogContenidoCorto>
-                    <BlogAutor>Autor - {blogData[blogIndex].autor}</BlogAutor>
-                </BlogPreviewContainer>
-            )}
+          {selectedBlog ? (
+          
+          <BlogPreviewContainer>
+                 
+              <BlogTitle>{selectedBlog.titulo}</BlogTitle>
+              {imagenes?.photos?.[imagenIndex]?.src?.original && (
+                  <img
+                    className='imagenTop'
+                    src={imagenes.photos[imagenIndex].src.original}
+                    alt='No se puede cargar la imagen'
+                  />
+                )}
+              <BlogAutor>{selectedBlog.autor}</BlogAutor>
+              <BlogContenidoCorto>{selectedBlog.contenido}</BlogContenidoCorto>
+              <h3 style={{fontWeight:"lighter"}}>Fecha de publicación - {formatoFecha(selectedBlog.fecha_publicado)}</h3>
+              </BlogPreviewContainer>
+          ) : (
+           
+            blogData.length > 0 && (
+              <BlogPreviewContainer key={blogData?.[blogIndex]?.id}>
+                <BlogTitle>{blogData?.[blogIndex]?.titulo}</BlogTitle>
+                {imagenes?.photos?.[imagenIndex]?.src?.original && (
+                  <img
+                    className='imagenTop'
+                    src={imagenes.photos[imagenIndex].src.original}
+                    alt='No se puede cargar la imagen'
+                  />
+                )}
+                <BlogContenidoCorto>{blogData?.[blogIndex]?.contenido}</BlogContenidoCorto>
+                <BlogAutor>Autor - {blogData?.[blogIndex]?.autor}</BlogAutor>
+                <h3 style={{fontWeight:"lighter"}}>Fecha de publicación - {formatoFecha(blogData?.[blogIndex]?.fecha_publicado)}</h3>
+              </BlogPreviewContainer>
+            )
+          )}
         </>
-    );
+      );
 
 }
 
