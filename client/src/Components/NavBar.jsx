@@ -18,11 +18,11 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 const NavBarButtonList = styled.ul  /*style*/`
 list-style:none;
 display:flex;
-gap :1rem;
+gap :1.75rem;
 align-items:center;
 width: 100%;
 justify-content: flex-end;
-margin-right:1rem;
+margin-right:1.25rem;
 
 li{
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

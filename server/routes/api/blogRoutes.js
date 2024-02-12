@@ -52,7 +52,7 @@ router.get('/acortadas', async (req, res) => {
 router.get('/filtrar', async (req,res) => {
     try{
 
-        const {autor =null ,titulo =null,contenido=null} = req.query 
+        const {autor = null ,titulo = null,contenido= null} = req.query 
         console.log(req.query)
         const sqlQuery = 'CALL leerEntradasFiltradas(?, ?, ?)';
 

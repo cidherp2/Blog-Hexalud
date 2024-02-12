@@ -45,19 +45,17 @@ END //
 DELIMITER ;
 
 DELIMITER //
-
-
-
 CREATE PROCEDURE leerEntradasFiltradas(
     IN p_autor VARCHAR(255),
     IN p_titulo VARCHAR(255),
     IN p_keywords TEXT
 )
 BEGIN 
-    SELECT * FROM entradas_blog
+    SELECT id, titulo, autor, LEFT(contenido, 70) AS acortado, fecha_publicado
+    FROM entradas_blog
     WHERE (p_autor IS NULL OR autor LIKE CONCAT('%', p_autor, '%'))
-      OR (p_titulo IS NULL OR titulo LIKE CONCAT('%', p_titulo, '%'))
-      OR (p_keywords IS NULL OR contienePalabraClave(contenido, p_keywords));
+      AND (p_titulo IS NULL OR titulo LIKE CONCAT('%', p_titulo, '%'))
+      AND (p_keywords IS NULL OR contienePalabraClave(contenido, p_keywords));
 END //
 DELIMITER ;
 
