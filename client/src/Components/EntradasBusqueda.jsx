@@ -65,9 +65,9 @@ align-items:right;
 
 const EntradasBusqueda = () => {
     const [blogCorto, setBlogCorto] = useState([]);
-    const [contenido, setContenido] = useState('');
-    const [autor, setAutor] = useState('');
-    const [titulo, setTitulo] = useState('');
+    const [contenido, setContenido] = useState(null);
+    const [autor, setAutor] = useState(null);
+    const [titulo, setTitulo] = useState(null);
     const fetchBlogData = async () => {
         try {
             const res = await fetch(`http://localhost:5173/blog/api/blogRoutes/filtrar?autor=ale&titulo=espalda&contenido=dramatica%20duele`)
@@ -134,18 +134,18 @@ const EntradasBusqueda = () => {
             <BarraBusqueda
                 type="text"
                 placeholder="Busca por Contenido"
-                value={ contenido }
+                value={ contenido || null}
                 onChange={cambioContenido}
             />
             <BarraBusqueda
                 type="text"
-                value={ autor }
+                value={ autor || null }
                 onChange={cambioAutor}
                 placeholder="Busca por Autor" />
         
             <BarraBusqueda
                 type="text"
-                value={ titulo }
+                value={ titulo || null}
                 onChange={cambioTitulo}
                 placeholder="Busca por Título" />
             <BotonBusqueda
