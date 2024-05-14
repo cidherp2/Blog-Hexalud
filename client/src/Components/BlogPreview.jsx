@@ -123,7 +123,7 @@ function BlogPreview() {
     }, []);
 
     const indexChanger = () => {
-      const index =  Math.floor(Math.random() * imageCount?.length ?? 0);
+      const index =  Math.floor(Math.random() * 80 ?? 0);
       return index;
    }
 
@@ -144,7 +144,7 @@ function BlogPreview() {
               {imagenes?.photos?.[imagenIndex]?.src?.original && (
                   <img
                     className='imagenTop'
-                    src={imagenes.photos[indexChanger].src.original}
+                    src={imagenes.photos[indexChanger()].src.original}
                     alt='No se puede cargar la imagen'
                   />
                 )}
