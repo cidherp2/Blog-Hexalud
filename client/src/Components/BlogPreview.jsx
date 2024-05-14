@@ -54,7 +54,7 @@ function BlogPreview() {
 
     const fetchBlogData = async () => {
         try {
-            const res = await fetch("http://localhost:5173/blog/api/blogRoutes/entrada");
+            const res = await fetch("https://blog-alex-portfolio-6f1472c41de2.herokuapp.com/blog/api/blogRoutes/entrada");
             if (!res.ok) {
                 throw new Error(`Error status ${res.status}`);
             }

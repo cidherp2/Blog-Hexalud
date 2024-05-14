@@ -169,7 +169,7 @@ const EntradasBusqueda = () => {
         const params = new URLSearchParams({
             autor, titulo, contenido
         })
-        const url = `http://localhost:5173/blog/api/blogRoutes/filtrar?${params}`
+        const url = `https://blog-alex-portfolio-6f1472c41de2.herokuapp.com/blog/api/blogRoutes/filtrar?${params}`
         try {
             const res = await fetch(url)
             if (!res.ok) {

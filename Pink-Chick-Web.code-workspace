@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "../challenges/GameNonStop"
+		},
+		{
+			"path": "../PCW/blog-server"
 		}
 	],
 	"settings": {}

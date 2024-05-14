@@ -165,7 +165,7 @@ function BlogNavBar() {
   };
 
   const handleNewEntrySubmit = async () => {
-    const url = 'http://localhost:5173/blog/api/blogRoutes/entrada';
+    const url = 'https://blog-alex-portfolio-6f1472c41de2.herokuapp.com/blog/api/blogRoutes/entrada';
     try {
       const res = await fetch(url, {
         method: 'POST',
