@@ -122,6 +122,12 @@ function BlogPreview() {
         FetchImagenes();
     }, []);
 
+    const indexChanger = () => {
+      const index =  Math.floor(Math.random() * imageCount?.length ?? 0);
+      return index;
+   }
+
+
     const formatoFecha = (dateString) => {
       const opciones = { year: 'numeric', month: '2-digit', day: '2-digit' };
       const fecha = new Date(dateString);
@@ -138,7 +144,7 @@ function BlogPreview() {
               {imagenes?.photos?.[imagenIndex]?.src?.original && (
                   <img
                     className='imagenTop'
-                    src={imagenes.photos[imagenIndex].src.original}
+                    src={imagenes.photos[indexChanger].src.original}
                     alt='No se puede cargar la imagen'
                   />
                 )}
@@ -149,7 +155,9 @@ function BlogPreview() {
           ) : (
            
             blogData.length > 0 && (
-              <BlogPreviewContainer key={blogData?.[blogIndex]?.id}>
+              <BlogPreviewContainer key={blogData?.[blogIndex]?.id}
+              onClick={indexChanger}
+              >
                 <BlogTitle>{blogData?.[blogIndex]?.titulo}</BlogTitle>
                 {imagenes?.photos?.[imagenIndex]?.src?.original && (
                   <img
