@@ -32,6 +32,16 @@ router.get('/entrada',async(req,res) =>{
         res.status(500).json({error: "Error al buscar la publicación"})
     }
 })
+router.get('/healthy',async(req,res) =>{
+    try {
+       
+     res.send("<h1>Hola</h1>")
+
+    }
+    catch(err){
+        res.status(500).json({error: "Error al buscar la publicación"})
+    }
+})
 
 router.get('/acortadas', async (req, res) => {
 
