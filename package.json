@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"cd ./server && npm run server\" \"cd ./client && npm run dev\"",
-    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\""
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
+    "start2":"cd ./server && npm run start"
   },
   "dependencies": {
     "concurrently": "^8.2.2"
